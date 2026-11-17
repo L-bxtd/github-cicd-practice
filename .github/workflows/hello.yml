@@ -1,0 +1,21 @@
+# 实验二 6.1：最小 Hello World CI，用于第一次看到 Actions 真实运行
+name: Hello World CI
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: 打印问候语
+        run: echo "Hello World!"
+      - name: 显示日期
+        run: date
+      - name: 列出目录内容
+        run: ls -l

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CI/CD 课堂练习</title>
+<style>
+  body { font-family: system-ui, "Microsoft YaHei", sans-serif; max-width: 640px; margin: 48px auto; padding: 0 16px; color: #1f2937; }
+  h1 { font-size: 1.6rem; border-bottom: 2px solid #2563eb; padding-bottom: 8px; }
+  .meta { color: #6b7280; font-size: .9rem; }
+</style>
+</head>
+<body>
+<h1>我的 CI/CD 演示站点</h1>
+<p>版本：<strong id="version">版本一</strong></p>
+<p>作者：柳泽璋 2024210401033</p>
+<p>页面打开时间：<time id="opened-at"></time></p>
+<p class="meta">此时间不是构建或部署时间；请到 Actions 核对发布记录。</p>
+<script>
+const now = new Date();
+const target = document.getElementById('opened-at');
+target.dateTime = now.toISOString();
+target.textContent = now.toLocaleString();
+</script>
+</body>
+</html>
