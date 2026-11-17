@@ -1,4 +1,4 @@
-# 实验二 6.2：Node.js 最小 CI（本仓库为纯静态页，暂无 package.json，npm 脚本用 --if-present 兜底）
+# 实验二 6.2：Node.js 最小 CI（本仓库为纯静态页，npm 相关步骤在 package.json 存在时才执行）
 name: ci
 on: [push, pull_request]
 
@@ -15,7 +15,14 @@ jobs:
         with:
           node-version: 20
       - run: if [ -f package.json ]; then npm ci; else echo "纯静态仓库，无 package.json，跳过 npm ci"; fi
-      - run: npm run lint --if-present && npm test --if-present --ci
-      - run: npm run build --if-present
+      - name: npm 检查（仅当 package.json 存在）
+        run: |
+          if [ -f package.json ]; then
+            npm run lint --if-present
+            npm test --if-present --ci
+            npm run build --if-present
+          else
+            echo "纯静态仓库，无 package.json，跳过 npm 检查"
+          fi
       - name: 校验静态产物
         run: test -f dist/index.html
